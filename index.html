@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FlowState — Pomodoro Timer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div class="bg-rings">
+    <div class="ring r1"></div>
+    <div class="ring r2"></div>
+    <div class="ring r3"></div>
+  </div>
+
+  <div class="app">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="logo">FLOW<span>STATE</span></div>
+      <div class="header-right">
+        <button class="icon-btn" id="settingsBtn" title="Settings">⚙</button>
+        <button class="icon-btn" id="soundBtn" title="Toggle sound">🔔</button>
+      </div>
+    </header>
+
+    <!-- MODE TABS -->
+    <div class="mode-tabs">
+      <button class="mode-tab active" data-mode="pomodoro">Pomodoro</button>
+      <button class="mode-tab" data-mode="short">Short Break</button>
+      <button class="mode-tab" data-mode="long">Long Break</button>
+    </div>
+
+    <!-- TIMER RING -->
+    <div class="timer-section">
+      <div class="ring-wrap">
+        <svg class="progress-svg" viewBox="0 0 320 320">
+          <circle class="prog-bg"   cx="160" cy="160" r="140"/>
+          <circle class="prog-fill" id="progCircle" cx="160" cy="160" r="140"/>
+        </svg>
+        <div class="timer-inner">
+          <div class="mode-label" id="modeLabel">FOCUS</div>
+          <div class="timer-display" id="timerDisplay">25:00</div>
+          <div class="session-dots" id="sessionDots"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="controls">
+      <button class="ctrl-btn secondary" id="resetBtn" title="Reset">↺</button>
+      <button class="ctrl-btn primary" id="startBtn">START</button>
+      <button class="ctrl-btn secondary" id="skipBtn" title="Skip">⏭</button>
+    </div>
+
+    <!-- TASK INPUT -->
+    <div class="task-section">
+      <div class="task-header">
+        <span class="task-title">Current Task</span>
+        <span class="task-count" id="taskCount">0 tasks</span>
+      </div>
+      <div class="task-input-row">
+        <input type="text" id="taskInput" placeholder="What are you working on?" maxlength="60"/>
+        <button class="add-task-btn" id="addTaskBtn">+</button>
+      </div>
+      <ul class="task-list" id="taskList"></ul>
+    </div>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-val" id="statPomodoros">0</span>
+        <span class="stat-label">Today</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-val" id="statFocusTime">0m</span>
+        <span class="stat-label">Focus time</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-val" id="statStreak">0</span>
+        <span class="stat-label">Streak</span>
+      </div>
+    </div>
+
+  </div><!-- .app -->
+
+  <!-- SETTINGS PANEL -->
+  <div class="settings-overlay" id="settingsOverlay">
+    <div class="settings-panel">
+      <div class="settings-header">
+        <h3>Settings</h3>
+        <button class="close-btn" id="closeSettings">✕</button>
+      </div>
+      <div class="settings-body">
+        <div class="setting-row">
+          <label>Focus duration (min)</label>
+          <input type="number" id="setPomodoro" value="25" min="1" max="60"/>
+        </div>
+        <div class="setting-row">
+          <label>Short break (min)</label>
+          <input type="number" id="setShort" value="5" min="1" max="30"/>
+        </div>
+        <div class="setting-row">
+          <label>Long break (min)</label>
+          <input type="number" id="setLong" value="15" min="1" max="60"/>
+        </div>
+        <div class="setting-row">
+          <label>Sessions before long break</label>
+          <input type="number" id="setSessions" value="4" min="2" max="8"/>
+        </div>
+        <div class="setting-row">
+          <label>Auto-start breaks</label>
+          <label class="toggle">
+            <input type="checkbox" id="setAutoBreak"/>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <label>Auto-start pomodoros</label>
+          <label class="toggle">
+            <input type="checkbox" id="setAutoPomodoro"/>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+      <button class="save-settings-btn" id="saveSettings">Save Changes</button>
+    </div>
+  </div>
+
+  <!-- SESSION COMPLETE TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
